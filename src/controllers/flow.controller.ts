@@ -16,8 +16,8 @@ export default class FlowController implements interfaces.Controller {
 
     @httpGet("")
     public async get(@request() req: express.Request, @response() res: express.Response) {
-
-        return this.flowRepository.get({})
+        const id = res.locals.jwt.user_id;       
+        return this.flowRepository.get({userId:id})
             .then((flows: IFlow[]) => res.status(200).json(flows));
     }
 
@@ -25,8 +25,10 @@ export default class FlowController implements interfaces.Controller {
     public async add(@request() req: express.Request, @response() res: express.Response) {
 
         const flowReq: IFlow = req.body;
+        const id = res.locals.jwt.user_id;
 
         flowReq.createdDate = new Date();
+        flowReq.userId = id;
 
         return this.flowRepository.post(flowReq)
             .then((flow: IFlow) => res.status(201).json(flow));
@@ -36,7 +38,7 @@ export default class FlowController implements interfaces.Controller {
     public async update(@request() req: express.Request, @response() res: express.Response) {
 
         const flowReq: IFlow = req.body;
-
+       
         //flowReq.createdDate = new Date();
 
         return this.flowRepository.put(flowReq)
