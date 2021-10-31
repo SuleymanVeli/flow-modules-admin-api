@@ -2,10 +2,11 @@ import * as express from "express";
 import { inject } from "inversify";
 import { controller, httpDelete, httpGet, httpPost, httpPut, interfaces, request, requestParam, response } from "inversify-express-utils";
 import { TYPES } from "../constants/types";
+import { jwtHandler } from "../middlewares/jwt.middleware";
 import { IFlow } from "../models/interfaces/flow.interface";
 import IFlowRepository from "../repositories/interfaces/flow.repo";
 
-@controller("/flows")
+@controller("/flows",jwtHandler)
 export default class FlowController implements interfaces.Controller {
     private readonly flowRepository: IFlowRepository;
 

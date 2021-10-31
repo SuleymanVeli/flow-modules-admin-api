@@ -12,6 +12,7 @@ import { TYPES } from './constants/types';
 import FlowRepository from './repositories/abstracts/mongoose/flow.repo';
 import IFlowRepository from './repositories/interfaces/flow.repo';
 import "./controllers/flow.controller";
+import "./controllers/user.controller";
 import IModel from './models/interfaces/model.interface';
 import FlowModel from './models/abstracts/flow.model';
 const swaggerUi = require('swagger-ui-express');
